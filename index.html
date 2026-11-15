@@ -1,1 +1,339 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Video Downloader - Fast & Free</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Navbar */
+        nav {
+            width: 100%;
+            padding: 1rem 5%;
+            background-color: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* Main Hero Section */
+        .container {
+            width: 90%;
+            max-width: 750px;
+            text-align: center;
+            margin: 3rem auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Input Box */
+        .downloader-box {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        input[type="url"] {
+            flex: 1;
+            min-width: 240px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input[type="url"]:focus {
+            border-color: var(--primary);
+        }
+
+        button.download-btn {
+            padding: 15px 30px;
+            border-radius: 10px;
+            border: none;
+            background-color: var(--primary);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button.download-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Status & Result Area */
+        #status-msg {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: #fbbf24;
+            display: none;
+        }
+
+        #result-card {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: var(--bg-color);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: none;
+            text-align: left;
+        }
+
+        .result-header {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .result-thumb {
+            width: 120px;
+            height: 70px;
+            background-color: #334155;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .quality-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .dl-link {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background-color: #10b981;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .dl-link:hover {
+            background-color: #059669;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background-color: var(--card-bg);
+            padding: 1.2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #60a5fa;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">ProDownloader</div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="admin-dashboard.html">Admin</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>All-in-One Video Downloader</h1>
+        <p class="subtitle">Paste any video URL below to download in HD, Full HD, or MP3 format instantly.</p>
+
+        <div class="downloader-box">
+            <div class="input-group">
+                <input type="url" id="video-url" placeholder="Paste video link here (https://...)" required>
+                <button class="download-btn" onclick="fetchVideo()">Download</button>
+            </div>
+            <div id="status-msg">Fetching video details, please wait...</div>
+
+            <!-- Result Preview Area -->
+            <div id="result-card">
+                <div class="result-header">
+                    <img src="https://via.placeholder.com/120x70/334155/ffffff?text=Video" alt="Thumbnail" class="result-thumb" id="vid-thumb">
+                    <div>
+                        <h4 id="vid-title">Sample Video Title</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);" id="vid-duration">Duration: 02:45</p>
+                    </div>
+                </div>
+                <div class="quality-options" id="download-links">
+                    <a href="#" class="dl-link">MP4 - 1080p (HD)</a>
+                    <a href="#" class="dl-link">MP4 - 720p</a>
+                    <a href="#" class="dl-link">MP3 - Audio</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="features" id="features">
+            <div class="feature-item">
+                <h3>⚡ Super Fast</h3>
+                <p>High-speed servers ensure quick video processing and instant downloads.</p>
+            </div>
+            <div class="feature-item">
+                <h3>🎥 HD Quality</h3>
+                <p>Supports 1080p, 720p, and high-bitrate audio extraction without watermarks.</p>
+            </div>
+            <div class="feature-item">
+                <h3>📱 Mobile Friendly</h3>
+                <p>Works smoothly on Android, iOS, Windows, and Mac browsers.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 ProDownloader. All rights reserved.
+    </footer>
+
+    <!-- Agar aapke paas frontend-integration.js file hai toh usse yahan link karein -->
+    <!-- <script src="frontend-integration.js"></script> -->
+
+    <script>
+        // Backend API URL (Jab aap apna app.py Render ya Railway par live karenge, toh uska link yahan dalein)
+        const BACKEND_API_URL = "https://your-backend-app.onrender.com/api/download";
+
+        async function fetchVideo() {
+            const urlInput = document.getElementById('video-url').value.trim();
+            const statusMsg = document.getElementById('status-msg');
+            const resultCard = document.getElementById('result-card');
+
+            if (!urlInput) {
+                alert("Please paste a valid video link first!");
+                return;
+            }
+
+            statusMsg.style.display = "block";
+            statusMsg.style.color = "#fbbf24";
+            statusMsg.innerText = "Processing link... Please wait.";
+            resultCard.style.display = "none";
+
+            try {
+                // Backend se connect karne ka code:
+                const response = await fetch(BACKEND_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: urlInput })
+                });
+
+                if (!response.ok) throw new Error("Backend not connected yet.");
+
+                const data = await response.json();
+                
+                // Agar backend live hai toh real data dikhayega
+                document.getElementById('vid-title').innerText = data.title || "Video Ready";
+                if (data.thumbnail) document.getElementById('vid-thumb').src = data.thumbnail;
+                
+                statusMsg.style.display = "none";
+                resultCard.style.display = "block";
+
+            } catch (error) {
+                // Jab tak Python backend (app.py) live nahi hota, tab tak UI preview dikhane ke liye:
+                setTimeout(() => {
+                    statusMsg.style.color = "#38bdf8";
+                    statusMsg.innerText = "UI Demo Mode: Connect your Python (app.py) backend URL in index.html to enable real downloads.";
+                    document.getElementById('vid-title').innerText = "Video Link Detected";
+                    resultCard.style.display = "block";
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
